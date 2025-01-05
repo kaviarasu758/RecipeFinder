@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Authentication</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            display: none;
+        }
+        .container h2 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .container label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .container input[type="text"],
+        .container input[type="email"],
+        .container input[type="password"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .container input[type="submit"],
+        .container input[type="button"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .container input[type="submit"]:hover,
+        .container input[type="button"]:hover {
+            background-color: #45a049;
+        }
+        .links {
+            text-align: center;
+            margin-top: 15px;
+        }
+        .links a {
+            color: #4CAF50;
+            text-decoration: none;
+            margin: 0 10px;
+            cursor: pointer;
+        }
+        .links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div id="login-container" class="container">
+        <h2>Login</h2>
+        <form id="login-form">
+            <label for="login-username">Username</label>
+            <input type="text" id="login-username" name="username" required>
+
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" name="password" required>
+
+            <input type="submit" value="Login">
+        </form>
+        <div class="links">
+            <a onclick="showContainer('forgot-password-container')">Forgot Password?</a>
+            <a onclick="showContainer('create-account-container')">Create an Account</a>
+            <a onclick="showContainer('admin-login-container')">Admin Login</a>
+        </div>
+    </div>
+
+    <div id="create-account-container" class="container">
+        <h2>Create Account</h2>
+        <form id="create-account-form">
+            <label for="create-username">Username</label>
+            <input type="text" id="create-username" name="username" required>
+
+            <label for="create-email">Email</label>
+            <input type="email" id="create-email" name="email" required>
+
+            <label for="create-password">Password</label>
+            <input type="password" id="create-password" name="password" required>
+
+            <input type="submit" value="Create Account">
+        </form>
+        <div class="links">
+            <a onclick="showContainer('login-container')">Back to Login</a>
+        </div>
+    </div>
+
+    <div id="forgot-password-container" class="container">
+        <h2>Forgot Password</h2>
+        <form id="forgot-password-form">
+            <label for="forgot-email">Email Address</label>
+            <input type="email" id="forgot-email" name="email" required>
+
+            <label for="verification-code">Verification Code</label>
+            <input type="text" id="verification-code" name="verificationCode" required>
+
+            <input type="button" id="next-button" value="Next" disabled onclick="showNewPasswordForm()">
+        </form>
+        <div class="links">
+            <a onclick="showContainer('login-container')">Back to Login</a>
+        </div>
+    </div>
+
+    <div id="new-password-container" class="container">
+        <h2>New Password</h2>
+        <form id="new-password-form">
+            <label for="new-password">New Password</label>
+            <input type="password" id="new-password" name="newPassword" required>
+            <input type="hidden" id="hidden-email" name="email">
+            <input type="hidden" id="hidden-code" name="verificationCode">
+            <input type="submit" value="Reset Password">
+        </form>
+        <div class="links">
+            <a onclick="showContainer('login-container')">Back to Login</a>
+        </div>
+    </div>
+
+    <div id="admin-login-container" class="container">
+        <h2>Admin Login</h2>
+        <form id="admin-login-form">
+            <label for="admin-username">Username</label>
+            <input type="text" id="admin-username" name="username" required>
+
+            <label for="admin-password">Password</label>
+            <input type="password" id="admin-password" name="password" required>
+
+            <input type="submit" value="Login as Admin">
+        </form>
+        <div class="links">
+            <a onclick="showContainer('login-container')">Back to Login</a>
+        </div>
+    </div>
+
+    <div id="admin-page-container" class="container">
+        <h2>Admin Page</h2>
+        <div id="user-list">
+            <!-- User list will be populated here -->
+        </div>
+        <input type="button" value="Approve All" onclick="approveAll()">
+        <div class="links">
+            <a onclick="logout()">Logout</a>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
